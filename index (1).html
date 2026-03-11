@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0e0e0e;
+      --white: #f5f4f0;
+      --mid: #7a7a72;
+      --accent: #1a1a1a;
+      --border: #d8d7d2;
+      --serif: 'DM Serif Display', serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      letter-spacing: 0.02em;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    /* DROPDOWN */
+    .dropdown { position: relative; }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--white);
+      border: 1px solid var(--border);
+      min-width: 180px;
+      padding: 0.6rem 0;
+      list-style: none;
+      /* Bridge gap so mouse can travel from trigger to menu */
+      padding-top: 1rem;
+      margin-top: 0;
+    }
+
+    /* Invisible bridge so hover doesn't break between nav link and menu */
+    .dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: 0;
+      right: 0;
+      height: 12px;
+    }
+
+    .dropdown:hover .dropdown-menu,
+    .dropdown-menu:hover { display: block; }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 0.5rem 1.4rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .dropdown-menu li a:hover {
+      color: var(--black);
+      background: #eeede9;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 4rem 6rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      max-width: 800px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--mid);
+    }
+
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: var(--mid);
+      max-width: 400px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 4rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid);
+      writing-mode: vertical-rl;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 6rem 4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 3.5rem;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.1;
+      margin-bottom: 3rem;
+    }
+
+    /* ABOUT GRID */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+
+    .about-card h3 {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .about-card ul li {
+      font-size: 0.9rem;
+      color: var(--mid);
+      padding: 0.45rem 0;
+      border-bottom: 1px solid #eeede9;
+      line-height: 1.5;
+    }
+
+    .about-card ul li:last-child { border-bottom: none; }
+
+    .about-card p {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.7;
+    }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 3rem;
+      padding: 2.8rem 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .exp-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .exp-left { padding-top: 0.2rem; }
+
+    .exp-org {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .exp-role {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .exp-right ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .exp-right ul li {
+      font-size: 0.88rem;
+      color: var(--mid);
+      padding: 0.4rem 0 0.4rem 1rem;
+      border-left: 1px solid var(--border);
+      margin-bottom: 0.4rem;
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 3rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-size: 0.78rem;
+      color: var(--mid);
+      letter-spacing: 0.05em;
+    }
+
+    /* FADE IN */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESUME */
+    .resume-block {
+      margin-bottom: 3rem;
+    }
+
+    .resume-heading {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .resume-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid #eeede9;
+    }
+
+    .resume-row:last-child { border-bottom: none; }
+
+    .resume-row-left { flex: 1; }
+
+    .resume-org {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--black);
+      margin-bottom: 0.2rem;
+    }
+
+    .resume-sub {
+      font-size: 0.83rem;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    .resume-date {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+      white-space: nowrap;
+      padding-top: 0.15rem;
+    }
+
+    .resume-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 0.6rem;
+    }
+
+    .resume-list li {
+      font-size: 0.83rem;
+      color: var(--mid);
+      padding: 0.3rem 0 0.3rem 1rem;
+      border-left: 1px solid var(--border);
+      margin-bottom: 0.3rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 900px) {
+      .resume-row { flex-direction: column; gap: 0.3rem; }
+      .resume-date { padding-top: 0; }
+    }
+
+
+      nav { padding: 1.2rem 2rem; }
+      .hero { padding: 0 2rem 5rem; }
+      section { padding: 4rem 2rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .exp-item { grid-template-columns: 1fr; gap: 1rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Portfolio</a>
+    <ul class="nav-links">
+      <li class="dropdown">
+        <a href="#about">About Me ↓</a>
+        <ul class="dropdown-menu">
+          <li><a href="#education">Education</a></li>
+          <li><a href="#funfacts">Fun Facts</a></li>
+          <li><a href="#interests">Interests</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#experience">Experience ↓</a>
+        <ul class="dropdown-menu">
+          <li><a href="#anova">ANova</a></li>
+          <li><a href="#fellow">Fellow MN</a></li>
+          <li><a href="#aso">ASO Events</a></li>
+          <li><a href="#icc">ICC Finance</a></li>
+        </ul>
+      </li>
+      <li><a href="Nguyen_Kelly.pdf" target="_blank">Resume</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <p class="hero-eyebrow">Portfolio &mdash; 2025</p>
+    <h1>Cognitive Science<br><em>&amp; Technology</em><br>Student</h1>
+    </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">01 &mdash; About Me</p>
+    <h2 class="section-title fade-in">Who I Am</h2>
+
+    <div class="about-grid">
+
+      <!-- Interests -->
+      <div class="about-card fade-in" id="interests">
+        <h3>Interests</h3>
+        <p>hiii i'm kelly! i like learning about product management and tech and love all things people, animals, finance and economics</p>
+      </div>
+
+      <!-- Education -->
+      <div class="about-card fade-in" id="education">
+        <h3>Education</h3>
+        <ul>
+          <li><strong style="color:var(--black)">UC Berkeley</strong><br>Cognitive Science &bull; 2025–2027</li>
+          <li><strong style="color:var(--black)">El Camino College</strong><br>Transfer Student &bull; 2023–2025</li>
+        </ul>
+      </div>
+
+      <!-- Fun Facts -->
+      <div class="about-card fade-in" id="funfacts">
+        <h3>Fun Facts</h3>
+        <ul>
+          <li>Completed 200+ units &amp; 60 classes at community college</li>
+          <li>Started as a Biology major — took Bio, Organic Chem, Physics &amp; Math — then found a passion for tech</li>
+          <li>Animal lover with 3 dogs and a cat. Dream: a backyard pond with ducks, birds, turtles &amp; wildlife</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <p class="section-label">02 &mdash; Experience</p>
+    <h2 class="section-title fade-in">Where I've Worked &amp; Led</h2>
+
+    <div class="exp-list">
+
+      <!-- ANova -->
+      <div class="exp-item" id="anova">
+        <div class="exp-left">
+          <p class="exp-org">ANova</p>
+          <p class="exp-role">CS Mentor &amp; Curriculum Developer</p>
+        </div>
+        <div class="exp-right">
+          <ul>
+            <li>Develop and teach individualized computer science curriculum to middle and high school students in the Bay Area</li>
+            <li>Provide weekly mentorship and technical instruction to increase equitable access to CS education</li>
+            <li>Collaborate with a team of 51 mentors across 8 school sites to design engaging lesson plans and interactive projects</li>
+            <li>Support planning of ANova Hacks — a 24-hour hackathon for high school students across the Bay Area</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Millennium Fellow -->
+      <div class="exp-item" id="fellow">
+        <div class="exp-left">
+          <p class="exp-org">UC Berkeley<br>Millennium Fellow</p>
+          <p class="exp-role">UN Academic Impact &bull; MCN</p>
+        </div>
+        <div class="exp-right">
+          <ul>
+            <li>Selected as part of a global cohort of student leaders advancing the UN Sustainable Development Goals</li>
+            <li>Led a campus-based social impact project focused on accessible access to resources on campus</li>
+            <li>Led development of the platform, overseeing UX/UI design models in Figma and Google Workspace</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- El Camino Ambassador -->
+      <div class="exp-item" id="aso">
+        <div class="exp-left">
+          <p class="exp-org">El Camino College</p>
+          <p class="exp-role">Ambassador | Outreach &amp; School Relations</p>
+        </div>
+        <div class="exp-right">
+          <ul>
+            <li>Collected and analyzed prospective student data to identify key outreach opportunities across Los Angeles communities, increasing engagement with higher education programs</li>
+            <li>Led campus tours for over 600 visitors, promoting El Camino's programs and resources</li>
+            <li>Leveraged data insights to refine outreach approaches, maximize resource impact, and enhance prospective student engagement</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ASO -->
+      <div class="exp-item">
+        <div class="exp-left">
+          <p class="exp-org">Associated Students Organization</p>
+          <p class="exp-role">Director of Academic Affairs &bull; June 2023–June 2025 | Torrance, CA<br><br>Natural Sciences Senator &bull; 2023–2024</p>
+        </div>
+        <div class="exp-right">
+          <ul>
+            <li>Used student survey data and campus metrics to identify high-demand courses and advocate for expanded Chemistry offerings for working students</li>
+            <li>Utilized project management tools to coordinate 30 Senators and multiple Division Councils, tracking progress on academic policies and initiatives</li>
+            <li>Applied data-driven insights to guide decisions on events and initiatives, optimizing resource and finance allocations</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ICC Finance -->
+      <div class="exp-item" id="icc">
+        <div class="exp-left">
+          <p class="exp-org">Inter Club Council</p>
+          <p class="exp-role">Director of Administrative Services &bull; 2023–2025</p>
+        </div>
+        <div class="exp-right">
+          <ul>
+            <li>Managed organization and oversight of 75+ on-campus clubs and a $98,000 budget</li>
+            <li>Prepared agendas and recorded minutes in compliance with the Brown Act and parliamentary procedure</li>
+            <li>Coordinated event logistics and scheduled meetings to streamline planning and execution</li>
+            <li>Proficient in Google Workspace and Microsoft 365 for document management, collaboration, and scheduling</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Kelly Nguyen</p>
+    <div style="display:flex; gap:2rem; align-items:center;">
+      <a href="mailto:kellykimnguyen@berkeley.edu" style="font-size:0.8rem; color:var(--mid); text-decoration:none; letter-spacing:0.05em; border-bottom: 1px solid var(--border);">kellykimnguyen@berkeley.edu</a>
+      <a href="https://www.linkedin.com/in/kellyknguyen" target="_blank" style="font-size:0.8rem; color:var(--mid); text-decoration:none; letter-spacing:0.05em; border-bottom: 1px solid var(--border);">linkedin.com/in/kellyknguyen</a>
+    </div>
+  </footer>
+
+  <script>
+    // Intersection observer for fade-ins
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in, .exp-item').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
