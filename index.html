@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <title>kelly's site!!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Source+Code+Pro:wght@300;400&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -14,8 +14,7 @@
       --mid: #7a7a72;
       --accent: #1a1a1a;
       --border: #d8d7d2;
-      --serif: 'DM Serif Display', serif;
-      --sans: 'DM Sans', sans-serif;
+      --sans: 'Nunito', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
@@ -43,9 +42,10 @@
     }
 
     .nav-logo {
-      font-family: var(--serif);
-      font-size: 1.2rem;
-      letter-spacing: 0.02em;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 1.1rem;
+      letter-spacing: 0.01em;
       color: var(--black);
       text-decoration: none;
     }
@@ -78,15 +78,13 @@
       transform: translateX(-50%);
       background: var(--white);
       border: 1px solid var(--border);
-      min-width: 180px;
+      min-width: 200px;
       padding: 0.6rem 0;
       list-style: none;
-      /* Bridge gap so mouse can travel from trigger to menu */
       padding-top: 1rem;
       margin-top: 0;
     }
 
-    /* Invisible bridge so hover doesn't break between nav link and menu */
     .dropdown-menu::before {
       content: '';
       position: absolute;
@@ -126,44 +124,14 @@
       position: relative;
     }
 
-    .hero-eyebrow {
-      font-size: 0.75rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 1.4rem;
-    }
-
     .hero h1 {
-      font-family: var(--serif);
-      font-size: clamp(3.5rem, 8vw, 7rem);
-      line-height: 1.05;
+      font-family: 'Source Code Pro', monospace;
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.15;
       letter-spacing: -0.01em;
       max-width: 800px;
-    }
-
-    .hero h1 em {
-      font-style: italic;
       color: var(--mid);
-    }
-
-    .hero-sub {
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: var(--mid);
-      max-width: 400px;
-      letter-spacing: 0.02em;
-    }
-
-    .hero-scroll {
-      position: absolute;
-      bottom: 2.5rem;
-      right: 4rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--mid);
-      writing-mode: vertical-rl;
     }
 
     /* SECTIONS */
@@ -181,8 +149,9 @@
     }
 
     .section-title {
-      font-family: var(--serif);
-      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
       line-height: 1.1;
       margin-bottom: 3rem;
     }
@@ -196,8 +165,9 @@
     }
 
     .about-card h3 {
-      font-family: var(--serif);
-      font-size: 1.3rem;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 1.1rem;
       margin-bottom: 1rem;
       padding-bottom: 0.8rem;
       border-bottom: 1px solid var(--border);
@@ -246,8 +216,9 @@
     .exp-left { padding-top: 0.2rem; }
 
     .exp-org {
-      font-family: var(--serif);
-      font-size: 1.15rem;
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 1rem;
       margin-bottom: 0.3rem;
     }
 
@@ -258,18 +229,10 @@
       color: var(--mid);
     }
 
-    .exp-right ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .exp-right ul li {
+    .exp-right p {
       font-size: 0.88rem;
       color: var(--mid);
-      padding: 0.4rem 0 0.4rem 1rem;
-      border-left: 1px solid var(--border);
-      margin-bottom: 0.4rem;
-      line-height: 1.6;
+      line-height: 1.8;
     }
 
     /* FOOTER */
@@ -298,74 +261,7 @@
       transform: translateY(0);
     }
 
-    /* RESUME */
-    .resume-block {
-      margin-bottom: 3rem;
-    }
-
-    .resume-heading {
-      font-family: var(--serif);
-      font-size: 1.4rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .resume-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 2rem;
-      padding: 1.2rem 0;
-      border-bottom: 1px solid #eeede9;
-    }
-
-    .resume-row:last-child { border-bottom: none; }
-
-    .resume-row-left { flex: 1; }
-
-    .resume-org {
-      font-size: 0.92rem;
-      font-weight: 500;
-      color: var(--black);
-      margin-bottom: 0.2rem;
-    }
-
-    .resume-sub {
-      font-size: 0.83rem;
-      color: var(--mid);
-      line-height: 1.6;
-    }
-
-    .resume-date {
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      color: var(--mid);
-      white-space: nowrap;
-      padding-top: 0.15rem;
-    }
-
-    .resume-list {
-      list-style: none;
-      padding: 0;
-      margin-top: 0.6rem;
-    }
-
-    .resume-list li {
-      font-size: 0.83rem;
-      color: var(--mid);
-      padding: 0.3rem 0 0.3rem 1rem;
-      border-left: 1px solid var(--border);
-      margin-bottom: 0.3rem;
-      line-height: 1.6;
-    }
-
     @media (max-width: 900px) {
-      .resume-row { flex-direction: column; gap: 0.3rem; }
-      .resume-date { padding-top: 0; }
-    }
-
-
       nav { padding: 1.2rem 2rem; }
       .hero { padding: 0 2rem 5rem; }
       section { padding: 4rem 2rem; }
@@ -379,23 +275,23 @@
 
   <!-- NAV -->
   <nav>
-    <a class="nav-logo" href="#">Portfolio</a>
+    <a class="nav-logo" href="#">kelly's site!!</a>
     <ul class="nav-links">
       <li class="dropdown">
         <a href="#about">About Me ↓</a>
         <ul class="dropdown-menu">
           <li><a href="#education">Education</a></li>
           <li><a href="#funfacts">Fun Facts</a></li>
-          <li><a href="#interests">Interests</a></li>
         </ul>
       </li>
       <li class="dropdown">
         <a href="#experience">Experience ↓</a>
         <ul class="dropdown-menu">
-          <li><a href="#anova">ANova</a></li>
-          <li><a href="#fellow">Fellow MN</a></li>
-          <li><a href="#aso">ASO Events</a></li>
-          <li><a href="#icc">ICC Finance</a></li>
+          <li><a href="#anova">ANOVA</a></li>
+          <li><a href="#fellow">United Nations</a></li>
+          <li><a href="#aso">Outreach &amp; School Relations</a></li>
+          <li><a href="#asodir">Associated Students Organization</a></li>
+          <li><a href="#icc">Inter Club Council</a></li>
         </ul>
       </li>
       <li><a href="Nguyen_Kelly.pdf" target="_blank">Resume</a></li>
@@ -404,39 +300,27 @@
 
   <!-- HERO -->
   <section class="hero" id="home">
-    <p class="hero-eyebrow">Portfolio &mdash; 2025</p>
-    <h1>Cognitive Science<br><em>&amp; Technology</em><br>Student</h1>
-    </section>
+    <h1>print("hello, world! this is kelly's website!")</h1>
+  </section>
 
   <!-- ABOUT -->
   <section id="about">
-    <p class="section-label">01 &mdash; About Me</p>
-    <h2 class="section-title fade-in">Who I Am</h2>
+    <h2 class="section-title fade-in">who am i??</h2>
 
     <div class="about-grid">
 
       <!-- Interests -->
       <div class="about-card fade-in" id="interests">
         <h3>Interests</h3>
-        <p>hiii i'm kelly! i like learning about product management and tech and love all things people, animals, finance and economics</p>
+        <p style="font-size:1.05rem;">hiii i'm kelly! i like learning about product management, tech and love all things people, animals, finance and economics!</p>
       </div>
 
       <!-- Education -->
       <div class="about-card fade-in" id="education">
         <h3>Education</h3>
         <ul>
-          <li><strong style="color:var(--black)">UC Berkeley</strong><br>Cognitive Science &bull; 2025–2027</li>
-          <li><strong style="color:var(--black)">El Camino College</strong><br>Transfer Student &bull; 2023–2025</li>
-        </ul>
-      </div>
-
-      <!-- Fun Facts -->
-      <div class="about-card fade-in" id="funfacts">
-        <h3>Fun Facts</h3>
-        <ul>
-          <li>Completed 200+ units &amp; 60 classes at community college</li>
-          <li>Started as a Biology major — took Bio, Organic Chem, Physics &amp; Math — then found a passion for tech</li>
-          <li>Animal lover with 3 dogs and a cat. Dream: a backyard pond with ducks, birds, turtles &amp; wildlife</li>
+          <li><strong style="color:var(--black)">UC Berkeley</strong><br>Cognitive Science | 2025–2027</li>
+          <li><strong style="color:var(--black)">El Camino College</strong><br>Transfer Student | 2023–2025</li>
         </ul>
       </div>
 
@@ -445,8 +329,7 @@
 
   <!-- EXPERIENCE -->
   <section id="experience">
-    <p class="section-label">02 &mdash; Experience</p>
-    <h2 class="section-title fade-in">Where I've Worked &amp; Led</h2>
+    <h2 class="section-title fade-in">locked in list:</h2>
 
     <div class="exp-list">
 
@@ -457,27 +340,18 @@
           <p class="exp-role">CS Mentor &amp; Curriculum Developer</p>
         </div>
         <div class="exp-right">
-          <ul>
-            <li>Develop and teach individualized computer science curriculum to middle and high school students in the Bay Area</li>
-            <li>Provide weekly mentorship and technical instruction to increase equitable access to CS education</li>
-            <li>Collaborate with a team of 51 mentors across 8 school sites to design engaging lesson plans and interactive projects</li>
-            <li>Support planning of ANova Hacks — a 24-hour hackathon for high school students across the Bay Area</li>
-          </ul>
+          <p>I develop and teach individualized computer science curriculum to middle and high school students in the Bay Area, providing weekly mentorship and technical instruction to increase equitable access to CS education. I collaborate with a team of 51 mentors across 8 school sites to design engaging lesson plans and interactive projects, and support planning of ANova Hacks — a 24-hour hackathon for high school students across the Bay Area.</p>
         </div>
       </div>
 
       <!-- Millennium Fellow -->
       <div class="exp-item" id="fellow">
         <div class="exp-left">
-          <p class="exp-org">UC Berkeley<br>Millennium Fellow</p>
-          <p class="exp-role">UN Academic Impact &bull; MCN</p>
+          <p class="exp-org">UC Berkeley Millennium Fellow</p>
+          <p class="exp-role">United Nations Academic Impact</p>
         </div>
         <div class="exp-right">
-          <ul>
-            <li>Selected as part of a global cohort of student leaders advancing the UN Sustainable Development Goals</li>
-            <li>Led a campus-based social impact project focused on accessible access to resources on campus</li>
-            <li>Led development of the platform, overseeing UX/UI design models in Figma and Google Workspace</li>
-          </ul>
+          <p>Selected as part of a global cohort of student leaders advancing the UN Sustainable Development Goals, I led a campus-based social impact project focused on accessible access to resources on campus. I also led development of the platform, overseeing UX/UI design models in Figma and Google Workspace.</p>
         </div>
       </div>
 
@@ -488,26 +362,18 @@
           <p class="exp-role">Ambassador | Outreach &amp; School Relations</p>
         </div>
         <div class="exp-right">
-          <ul>
-            <li>Collected and analyzed prospective student data to identify key outreach opportunities across Los Angeles communities, increasing engagement with higher education programs</li>
-            <li>Led campus tours for over 600 visitors, promoting El Camino's programs and resources</li>
-            <li>Leveraged data insights to refine outreach approaches, maximize resource impact, and enhance prospective student engagement</li>
-          </ul>
+          <p>I collected and analyzed prospective student data to identify key outreach opportunities across Los Angeles communities, increasing engagement with higher education programs. I led campus tours for over 600 visitors promoting El Camino's programs and resources, and leveraged data insights to refine outreach approaches, maximize resource impact, and enhance prospective student engagement.</p>
         </div>
       </div>
 
       <!-- ASO -->
-      <div class="exp-item">
+      <div class="exp-item" id="asodir">
         <div class="exp-left">
           <p class="exp-org">Associated Students Organization</p>
-          <p class="exp-role">Director of Academic Affairs &bull; June 2023–June 2025 | Torrance, CA<br><br>Natural Sciences Senator &bull; 2023–2024</p>
+          <p class="exp-role">Director of Academic Affairs | 2023–2025<br><br>Natural Sciences Senator | 2023–2024</p>
         </div>
         <div class="exp-right">
-          <ul>
-            <li>Used student survey data and campus metrics to identify high-demand courses and advocate for expanded Chemistry offerings for working students</li>
-            <li>Utilized project management tools to coordinate 30 Senators and multiple Division Councils, tracking progress on academic policies and initiatives</li>
-            <li>Applied data-driven insights to guide decisions on events and initiatives, optimizing resource and finance allocations</li>
-          </ul>
+          <p>As Director of Academic Affairs and Natural Sciences Senator, I used student survey data and campus metrics to identify high-demand courses and advocate for expanded Chemistry offerings for working students. I utilized project management tools to coordinate 30 Senators and multiple Division Councils, tracking progress on academic policies and applying data-driven insights to optimize resource and finance allocations.</p>
         </div>
       </div>
 
@@ -515,21 +381,34 @@
       <div class="exp-item" id="icc">
         <div class="exp-left">
           <p class="exp-org">Inter Club Council</p>
-          <p class="exp-role">Director of Administrative Services &bull; 2023–2025</p>
+          <p class="exp-role">Director of Administrative Services | 2023–2025</p>
         </div>
         <div class="exp-right">
-          <ul>
-            <li> I was able to join ICC as a freshman in college where I got my first experience managing a budget of $100,000. I organized 75+ on campus clubs, made agendas for offical meetings and coordinated events for the student body.</li>
-          </ul>
+          <p>I was responsible for the organization of over 75 on-campus clubs and managed a $98,000 budget. I prepared agendas and recorded minutes in compliance with the Brown Act and parliamentary procedure, scheduled meetings, and coordinated event logistics to streamline planning and execution. I am proficient in Google Workspace and Microsoft 365 for document management, collaboration, and scheduling.</p>
         </div>
       </div>
 
     </div>
   </section>
 
+  <!-- FUN FACTS -->
+  <section id="funfacts">
+    <h2 class="section-title fade-in">random things about me</h2>
+    <div class="about-grid">
+      <div class="about-card fade-in">
+        <ul>
+          <li>Completed 200+ units &amp; 60 classes at community college... (yikes)</li>
+          <li>Started as a Biology major — took Bio, Organic Chem, Physics &amp; Math — then found a passion for tech</li>
+          <li>I love animals, i have 3 dogs and a cat. I would love to have a pond with a bunch of ducks, birds, turtles and other wildlife.</li>
+          <li>in my spare time i love hiking, camping, ice skating, designing, photography and staring at spreadsheets for hours hehe</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
   <footer>
-    <p>&copy; 2025 Kelly Nguyen</p>
+    <p>feel free to contact me here!</p>
     <div style="display:flex; gap:2rem; align-items:center;">
       <a href="mailto:kellykimnguyen@berkeley.edu" style="font-size:0.8rem; color:var(--mid); text-decoration:none; letter-spacing:0.05em; border-bottom: 1px solid var(--border);">kellykimnguyen@berkeley.edu</a>
       <a href="https://www.linkedin.com/in/kellyknguyen" target="_blank" style="font-size:0.8rem; color:var(--mid); text-decoration:none; letter-spacing:0.05em; border-bottom: 1px solid var(--border);">linkedin.com/in/kellyknguyen</a>
@@ -537,12 +416,9 @@
   </footer>
 
   <script>
-    // Intersection observer for fade-ins
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-        }
+        if (e.isIntersecting) e.target.classList.add('visible');
       });
     }, { threshold: 0.12 });
 
