@@ -4,31 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>kelly's site!!</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Source+Code+Pro:wght@300;400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --black: #0e0e0e;
       --white: #f5f4f0;
       --mid: #7a7a72;
-      --accent: #1a1a1a;
       --border: #d8d7d2;
-      --sans: 'Nunito', sans-serif;
+      --mono: 'Source Code Pro', monospace;
     }
-
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--white);
       color: var(--black);
-      font-family: var(--sans);
+      font-family: var(--mono);
       font-weight: 300;
       line-height: 1.7;
       overflow-x: hidden;
     }
-
-    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -36,40 +30,32 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.4rem 4rem;
+      padding: 1.2rem 3rem;
       background: var(--white);
       border-bottom: 1px solid var(--border);
     }
-
     .nav-logo {
-      font-family: var(--sans);
-      font-weight: 600;
-      font-size: 1.1rem;
-      letter-spacing: 0.01em;
+      font-family: var(--mono);
+      font-weight: 500;
+      font-size: 0.95rem;
       color: var(--black);
       text-decoration: none;
     }
-
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 2rem;
       list-style: none;
+      align-items: center;
     }
-
-    .nav-links a {
-      font-size: 0.82rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .nav-links > li > a {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
       color: var(--mid);
       text-decoration: none;
       transition: color 0.2s;
     }
-
-    .nav-links a:hover { color: var(--black); }
-
-    /* DROPDOWN */
+    .nav-links > li > a:hover { color: var(--black); }
     .dropdown { position: relative; }
-
     .dropdown-menu {
       display: none;
       position: absolute;
@@ -78,351 +64,358 @@
       transform: translateX(-50%);
       background: var(--white);
       border: 1px solid var(--border);
-      min-width: 200px;
-      padding: 0.6rem 0;
+      min-width: 220px;
       list-style: none;
-      padding-top: 1rem;
-      margin-top: 0;
+      padding: 0.5rem 0;
     }
-
     .dropdown-menu::before {
       content: '';
       position: absolute;
-      top: -12px;
-      left: 0;
-      right: 0;
+      top: -12px; left: 0; right: 0;
       height: 12px;
     }
-
     .dropdown:hover .dropdown-menu,
     .dropdown-menu:hover { display: block; }
-
     .dropdown-menu li a {
       display: block;
-      padding: 0.5rem 1.4rem;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      padding: 0.45rem 1.2rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
       color: var(--mid);
       text-decoration: none;
       transition: color 0.2s, background 0.2s;
     }
-
-    .dropdown-menu li a:hover {
-      color: var(--black);
-      background: #eeede9;
+    .dropdown-menu li a:hover { color: var(--black); background: #eeede9; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
     }
-
-    /* HERO */
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--black);
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--white);
+      z-index: 99;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1.8rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--mid);
+      text-decoration: none;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--black); }
+    .mobile-close {
+      position: absolute;
+      top: 1.4rem; right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--mid);
+      font-family: var(--mono);
+    }
     .hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding: 0 4rem 6rem;
+      padding: 0 3rem 5rem;
       border-bottom: 1px solid var(--border);
-      position: relative;
     }
-
     .hero h1 {
-      font-family: 'Source Code Pro', monospace;
+      font-family: var(--mono);
       font-weight: 300;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      line-height: 1.15;
-      letter-spacing: -0.01em;
-      max-width: 800px;
+      font-size: clamp(1.1rem, 3vw, 2.2rem);
+      line-height: 1.3;
       color: var(--mid);
+      max-width: 700px;
     }
-
-    /* SECTIONS */
     section {
-      padding: 6rem 4rem;
+      padding: 5rem 3rem;
       border-bottom: 1px solid var(--border);
     }
-
-    .section-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 3.5rem;
-    }
-
     .section-title {
-      font-family: var(--sans);
-      font-weight: 600;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      line-height: 1.1;
+      font-family: var(--mono);
+      font-weight: 400;
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      line-height: 1.2;
       margin-bottom: 3rem;
+      color: var(--black);
     }
-
-    /* ABOUT GRID */
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 3rem;
-      margin-top: 2rem;
+      margin-top: 1rem;
     }
-
     .about-card h3 {
-      font-family: var(--sans);
-      font-weight: 600;
-      font-size: 1.1rem;
+      font-family: var(--mono);
+      font-weight: 400;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
       margin-bottom: 1rem;
-      padding-bottom: 0.8rem;
+      padding-bottom: 0.7rem;
       border-bottom: 1px solid var(--border);
-    }
-
-    .about-card ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .about-card ul li {
-      font-size: 1rem;
       color: var(--mid);
-      padding: 0.45rem 0;
+    }
+    .about-card ul { list-style: none; padding: 0; }
+    .about-card ul li {
+      font-size: 0.92rem;
+      color: var(--mid);
+      padding: 0.5rem 0;
       border-bottom: 1px solid #eeede9;
       line-height: 1.6;
     }
-
     .about-card ul li:last-child { border-bottom: none; }
-
     .about-card p {
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--mid);
-      line-height: 1.7;
+      line-height: 1.8;
     }
-
-    /* EXPERIENCE */
-    .exp-list { display: flex; flex-direction: column; gap: 0; }
-
+    .exp-list { display: flex; flex-direction: column; }
     .exp-item {
       display: grid;
-      grid-template-columns: 260px 1fr;
+      grid-template-columns: 240px 1fr;
       gap: 3rem;
-      padding: 2.8rem 0;
+      padding: 2.5rem 0;
       border-bottom: 1px solid var(--border);
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.6s ease, transform 0.6s ease;
     }
-
-    .exp-item.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .exp-left { padding-top: 0.2rem; }
-
+    .exp-item.visible { opacity: 1; transform: translateY(0); }
     .exp-org {
-      font-family: var(--sans);
-      font-weight: 600;
-      font-size: 1rem;
+      font-family: var(--mono);
+      font-weight: 500;
+      font-size: 0.88rem;
       margin-bottom: 0.3rem;
+      color: var(--black);
     }
-
     .exp-role {
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
       color: var(--mid);
+      line-height: 1.6;
     }
-
     .exp-right p {
-      font-size: 1rem;
+      font-size: 0.92rem;
       color: var(--mid);
-      line-height: 1.8;
+      line-height: 1.9;
     }
-
-    /* FOOTER */
+    .funfacts-list { list-style: none; padding: 0; max-width: 700px; }
+    .funfacts-list li {
+      font-size: 0.95rem;
+      color: var(--mid);
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #eeede9;
+      line-height: 1.7;
+    }
+    .funfacts-list li:last-child { border-bottom: none; }
     footer {
-      padding: 3rem 4rem;
+      padding: 2.5rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
-
-    footer p {
+    footer p { font-size: 0.78rem; color: var(--mid); }
+    footer a {
       font-size: 0.78rem;
       color: var(--mid);
-      letter-spacing: 0.05em;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
     }
-
-    /* FADE IN */
+    footer a:hover { color: var(--black); }
     .fade-in {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(20px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    @media (max-width: 900px) {
-      nav { padding: 1.2rem 2rem; }
-      .hero { padding: 0 2rem 5rem; }
-      section { padding: 4rem 2rem; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero { padding: 0 1.5rem 4rem; }
+      .hero h1 { font-size: clamp(0.9rem, 3.5vw, 1.3rem); }
+      section { padding: 3.5rem 1.5rem; }
       .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .exp-item { grid-template-columns: 1fr; gap: 1rem; }
-      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.8rem; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
     <a class="nav-logo" href="#">kelly's site!!</a>
     <ul class="nav-links">
       <li class="dropdown">
-        <a href="#about">About Me ↓</a>
+        <a href="#about">about me</a>
         <ul class="dropdown-menu">
-          <li><a href="#education">Education</a></li>
-          <li><a href="#funfacts">Fun Facts</a></li>
+          <li><a href="#education">education</a></li>
+          <li><a href="#funfacts">random things about me</a></li>
         </ul>
       </li>
       <li class="dropdown">
-        <a href="#experience">Experience ↓</a>
+        <a href="#experience">experience</a>
         <ul class="dropdown-menu">
-          <li><a href="#anova">ANOVA</a></li>
-          <li><a href="#fellow">United Nations</a></li>
-          <li><a href="#aso">Outreach &amp; School Relations</a></li>
-          <li><a href="#asodir">Associated Students Organization</a></li>
-          <li><a href="#icc">Inter Club Council</a></li>
+          <li><a href="#anova">anova</a></li>
+          <li><a href="#fellow">united nations</a></li>
+          <li><a href="#aso">outreach &amp; school relations</a></li>
+          <li><a href="#asodir">associated students organization</a></li>
+          <li><a href="#icc">inter club council</a></li>
         </ul>
       </li>
-      <li><a href="Nguyen_Kelly.pdf" target="_blank">Resume</a></li>
+      <li><a href="Nguyen_Kelly.pdf" target="_blank">resume</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="open menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
-  <!-- HERO -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose">x</button>
+    <a href="#about" onclick="closeMobile()">about me</a>
+    <a href="#education" onclick="closeMobile()">education</a>
+    <a href="#funfacts" onclick="closeMobile()">random things about me</a>
+    <a href="#experience" onclick="closeMobile()">experience</a>
+    <a href="#anova" onclick="closeMobile()">anova</a>
+    <a href="#fellow" onclick="closeMobile()">united nations</a>
+    <a href="#aso" onclick="closeMobile()">outreach &amp; school relations</a>
+    <a href="#asodir" onclick="closeMobile()">associated students organization</a>
+    <a href="#icc" onclick="closeMobile()">inter club council</a>
+    <a href="Nguyen_Kelly.pdf" target="_blank">resume</a>
+  </div>
+
   <section class="hero" id="home">
     <h1>print("hello, world! this is kelly's website!")</h1>
   </section>
 
-  <!-- ABOUT -->
   <section id="about">
     <h2 class="section-title fade-in">who am i??</h2>
-
     <div class="about-grid">
-
-      <!-- Interests -->
       <div class="about-card fade-in" id="interests">
-        <h3>Interests</h3>
-        <p style="font-size:1.05rem;">hiii i'm kelly! i like learning about product management, tech and love all things people, animals, finance and economics!</p>
+        <h3>// intro</h3>
+        <p>hiii i'm kelly! i like learning about product management, tech and love all things people, animals, finance and economics!</p>
       </div>
-
-      <!-- Education -->
       <div class="about-card fade-in" id="education">
-        <h3>Education</h3>
+        <h3>// education</h3>
         <ul>
-          <li><strong style="color:var(--black)">UC Berkeley</strong><br>Cognitive Science | 2025–2027</li>
-          <li><strong style="color:var(--black)">El Camino College</strong><br>Transfer Student | 2023–2025</li>
+          <li><strong style="color:var(--black)">uc berkeley</strong><br>cognitive science | 2025–2027</li>
+          <li><strong style="color:var(--black)">el camino college</strong><br>transfer student | 2023–2025</li>
         </ul>
       </div>
-
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
   <section id="experience">
     <h2 class="section-title fade-in">locked in list:</h2>
-
     <div class="exp-list">
 
-      <!-- ANova -->
       <div class="exp-item" id="anova">
         <div class="exp-left">
-          <p class="exp-org">ANova</p>
-          <p class="exp-role">CS Mentor &amp; Curriculum Developer</p>
+          <p class="exp-org">anova</p>
+          <p class="exp-role">cs mentor &amp; curriculum developer</p>
         </div>
         <div class="exp-right">
-          <p>I develop and teach individualized computer science curriculum to middle and high school students in the Bay Area, providing weekly mentorship and technical instruction to increase equitable access to CS education. I collaborate with a team of 51 mentors across 8 school sites to design engaging lesson plans and interactive projects, and support planning of ANova Hacks — a 24-hour hackathon for high school students across the Bay Area.</p>
+          <p>i develop and teach individualized computer science curriculum to middle and high school students in the bay area, providing weekly mentorship and technical instruction to increase equitable access to cs education. i collaborate with a team of 51 mentors across 8 school sites to design engaging lesson plans and interactive projects, and support planning of anova hacks — a 24-hour hackathon for high school students across the bay area.</p>
         </div>
       </div>
 
-      <!-- Millennium Fellow -->
       <div class="exp-item" id="fellow">
         <div class="exp-left">
-          <p class="exp-org">UC Berkeley Millennium Fellow</p>
-          <p class="exp-role">United Nations Academic Impact</p>
+          <p class="exp-org">uc berkeley millennium fellow</p>
+          <p class="exp-role">united nations academic impact</p>
         </div>
         <div class="exp-right">
-          <p>Selected as part of a global cohort of student leaders advancing the UN Sustainable Development Goals, I led a campus-based social impact project focused on accessible access to resources on campus. I also led development of the platform, overseeing UX/UI design models in Figma and Google Workspace.</p>
+          <p>selected as part of a global cohort of student leaders advancing the un sustainable development goals, i led a campus-based social impact project focused on accessible access to resources on campus. i also led development of the platform, overseeing ux/ui design models in figma and google workspace.</p>
         </div>
       </div>
 
-      <!-- El Camino Ambassador -->
       <div class="exp-item" id="aso">
         <div class="exp-left">
-          <p class="exp-org">El Camino College</p>
-          <p class="exp-role">Ambassador | Outreach &amp; School Relations</p>
+          <p class="exp-org">el camino college</p>
+          <p class="exp-role">ambassador | outreach &amp; school relations</p>
         </div>
         <div class="exp-right">
-          <p>I collected and analyzed prospective student data to identify key outreach opportunities across Los Angeles communities, increasing engagement with higher education programs. I led campus tours for over 600 visitors promoting El Camino's programs and resources, and leveraged data insights to refine outreach approaches, maximize resource impact, and enhance prospective student engagement.</p>
+          <p>i collected and analyzed prospective student data to identify key outreach opportunities across los angeles communities, increasing engagement with higher education programs. i led campus tours for over 600 visitors promoting el camino's programs and resources, and leveraged data insights to refine outreach approaches, maximize resource impact, and enhance prospective student engagement.</p>
         </div>
       </div>
 
-      <!-- ASO -->
       <div class="exp-item" id="asodir">
         <div class="exp-left">
-          <p class="exp-org">Associated Students Organization</p>
-          <p class="exp-role">Director of Academic Affairs</p>
+          <p class="exp-org">associated students organization</p>
+          <p class="exp-role">director of academic affairs</p>
         </div>
         <div class="exp-right">
-          <p>As Director of Academic Affairs and Natural Sciences Senator, I used student survey data and campus metrics to identify high-demand courses and advocate for expanded Chemistry offerings for working students. I utilized project management tools to coordinate 30 Senators and multiple Division Councils, tracking progress on academic policies and applying data-driven insights to optimize resource and finance allocations.</p>
+          <p>as director of academic affairs and natural sciences senator, i used student survey data and campus metrics to identify high-demand courses and advocate for expanded chemistry offerings for working students. i utilized project management tools to coordinate 30 senators and multiple division councils, tracking progress on academic policies and applying data-driven insights to optimize resource and finance allocations.</p>
         </div>
       </div>
 
-      <!-- ICC Finance -->
       <div class="exp-item" id="icc">
         <div class="exp-left">
-          <p class="exp-org">Inter Club Council</p>
-          <p class="exp-role">Director of Administrative Services</p>
+          <p class="exp-org">inter club council</p>
+          <p class="exp-role">director of administrative services</p>
         </div>
         <div class="exp-right">
-          <p>I was responsible for the organization of over 75 on-campus clubs and managed a $98,000 budget. I prepared agendas and recorded minutes in compliance with the Brown Act and parliamentary procedure, scheduled meetings, and coordinated event logistics to streamline planning and execution. I am proficient in Google Workspace and Microsoft 365 for document management, collaboration, and scheduling.</p>
+          <p>i was responsible for the organization of over 75 on-campus clubs and managed a $98,000 budget. i prepared agendas and recorded minutes in compliance with the brown act and parliamentary procedure, scheduled meetings, and coordinated event logistics to streamline planning and execution. i am proficient in google workspace and microsoft 365 for document management, collaboration, and scheduling.</p>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- FUN FACTS -->
   <section id="funfacts">
     <h2 class="section-title fade-in">random things about me</h2>
-    <div class="about-grid">
-      <div class="about-card fade-in">
-        <ul>
-          <li>i liked every subject so i completed 200+ units across 5 cc's. my transcript is around 9 pages long...</li>
-          <li>started as a biology major, took bio, ochem and physics etc but then found a passion for tech after data 8</li>
-          <li>i have 3 dogs and a cat hehe</li>
-          <li>in my spare time i love hiking, camping, ice skating, designing, photography and staring at spreadsheets for hours</li>
-        </ul>
-      </div>
-    </div>
+    <ul class="funfacts-list fade-in">
+      <li>i liked every subject so i completed 200+ units across 5 cc's. my transcript is around 9 pages long...</li>
+      <li>started as a biology major, took bio, ochem and physics etc but then found a passion for tech after data 8</li>
+      <li>i have 3 dogs and a cat hehe</li>
+      <li>in my spare time i love hiking, camping, ice skating, designing, photography and staring at spreadsheets for hours</li>
+    </ul>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <p>feel free to contact me here!</p>
-    <div style="display:flex; gap:2rem; align-items:center;">
-      <a href="mailto:kellykimnguyen@berkeley.edu" style="font-size:0.8rem; color:var(--mid); text-decoration:none; letter-spacing:0.05em; border-bottom: 1px solid var(--border);">kellykimnguyen@berkeley.edu</a>
-      <a href="https://www.linkedin.com/in/kellyknguyen" target="_blank" style="font-size:0.8rem; color:var(--mid); text-decoration:none; letter-spacing:0.05em; border-bottom: 1px solid var(--border);">linkedin.com/in/kellyknguyen</a>
+    <div style="display:flex; gap:2rem; flex-wrap:wrap;">
+      <a href="mailto:kellykimnguyen@berkeley.edu">kellykimnguyen@berkeley.edu</a>
+      <a href="https://www.linkedin.com/in/kellyknguyen" target="_blank">linkedin.com/in/kellyknguyen</a>
     </div>
   </footer>
 
   <script>
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('visible');
-      });
-    }, { threshold: 0.12 });
-
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
     document.querySelectorAll('.fade-in, .exp-item').forEach(el => observer.observe(el));
+
+    function closeMobile() {
+      document.getElementById('mobileMenu').classList.remove('open');
+    }
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.add('open');
+    });
+    document.getElementById('mobileClose').addEventListener('click', closeMobile);
   </script>
 </body>
 </html>
