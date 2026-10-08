@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>kelly's site!!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0e0e0e;
+      --white: #f5f4f0;
+      --mid: #7a7a72;
+      --border: #d8d7d2;
+      --mono: 'Source Code Pro', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: var(--mono);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 2.5rem;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--black);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links > li > a {
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links > li > a:hover { color: var(--black); }
+    .dropdown { position: relative; }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--white);
+      border: 1px solid var(--border);
+      min-width: 210px;
+      list-style: none;
+      padding: 0.4rem 0;
+    }
+    .dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -12px; left: 0; right: 0;
+      height: 12px;
+    }
+    .dropdown:hover .dropdown-menu,
+    .dropdown-menu:hover { display: block; }
+    .dropdown-menu li a {
+      display: block;
+      padding: 0.4rem 1.1rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s, background 0.2s;
+    }
+    .dropdown-menu li a:hover { color: var(--black); background: #eeede9; }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+      z-index: 101;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--black);
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--white);
+      z-index: 99;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1.6rem;
+      padding: 2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--mid);
+      text-decoration: none;
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+      padding: 0.2rem 0;
+    }
+    .mobile-menu a:hover { color: var(--black); }
+    .mobile-close {
+      position: absolute;
+      top: 1.2rem; right: 1.5rem;
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--mid);
+      font-family: var(--mono);
+      z-index: 102;
+    }
+    .hero {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 5rem 2.5rem 3.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero h1 {
+      font-weight: 300;
+      font-size: clamp(1rem, 2.5vw, 1.9rem);
+      line-height: 1.4;
+      color: var(--mid);
+      max-width: 680px;
+    }
+    section {
+      padding: 4rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-title {
+      font-weight: 400;
+      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      line-height: 1.2;
+      margin-bottom: 2.5rem;
+      color: var(--black);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    .about-card h3 {
+      font-weight: 400;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.9rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--mid);
+    }
+    .about-card ul { list-style: none; padding: 0; }
+    .about-card ul li {
+      font-size: 0.88rem;
+      color: var(--mid);
+      padding: 0.45rem 0;
+      border-bottom: 1px solid #eeede9;
+      line-height: 1.6;
+    }
+    .about-card ul li:last-child { border-bottom: none; }
+    .about-card p {
+      font-size: 0.92rem;
+      color: var(--mid);
+      line-height: 1.8;
+    }
+    .exp-list { display: flex; flex-direction: column; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 2.5rem;
+      padding: 2.2rem 0;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .exp-item.visible { opacity: 1; transform: translateY(0); }
+    .exp-org {
+      font-weight: 500;
+      font-size: 0.85rem;
+      margin-bottom: 0.25rem;
+      color: var(--black);
+    }
+    .exp-role {
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+    .exp-right p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.9;
+    }
+    .funfacts-list { list-style: none; padding: 0; max-width: 680px; }
+    .funfacts-list li {
+      font-size: 0.92rem;
+      color: var(--mid);
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #eeede9;
+      line-height: 1.7;
+    }
+    .funfacts-list li:last-child { border-bottom: none; }
+    footer {
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    footer p { font-size: 0.75rem; color: var(--mid); }
+    footer a {
+      font-size: 0.75rem;
+      color: var(--mid);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--black); }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.4rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero { min-height: 50vh; padding: 4.5rem 1.4rem 3rem; }
+      .hero h1 { font-size: clamp(0.88rem, 4vw, 1.2rem); }
+      section { padding: 3rem 1.4rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 1.8rem; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.6rem; padding: 1.8rem 0; }
+      footer { padding: 1.8rem 1.4rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#">kelly's site!!</a>
+    <ul class="nav-links">
+      <li class="dropdown">
+        <a href="#about">about me</a>
+        <ul class="dropdown-menu">
+          <li><a href="#education">education</a></li>
+          <li><a href="#funfacts">life outside tech</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#experience">experience</a>
+        <ul class="dropdown-menu">
+          <li><a href="#admissions">uc berkeley admissions</a></li>
+          <li><a href="#gwc">girls who code</a></li>
+          <li><a href="#anova">anova</a></li>
+          <li><a href="#transferrep">asuc transfer student rep</a></li>
+          <li><a href="#corps">california college corps</a></li>
+          <li><a href="#fellow">united nations</a></li>
+          <li><a href="#aso">outreach &amp; school relations</a></li>
+          <li><a href="#asodir">aso &amp; inter club council</a></li>
+        </ul>
+      </li>
+      <li><a href="Nguyen_Kelly.pdf" target="_blank">resume</a></li>
+      <li><a href="Nguyen_Kelly_Transcripts.pdf" target="_blank">transcripts</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose">x</button>
+    <a href="#about">about me</a>
+    <a href="#experience">experience</a>
+    <a href="Nguyen_Kelly.pdf" target="_blank">resume</a>
+    <a href="Nguyen_Kelly_Transcripts.pdf" target="_blank">transcripts</a>
+  </div>
+
+  <section class="hero" id="home">
+    <h1>print("hello, world! this is kelly's website!")</h1>
+  </section>
+
+  <section id="about">
+    <h2 class="section-title fade-in">who am i??</h2>
+    <div class="about-grid">
+      <div class="about-card fade-in" id="interests">
+        <h3>intro</h3>
+        <p>hiii i'm kelly! i like learning about product management, tech and love all things people, finance and economics!</p>
+      </div>
+      <div class="about-card fade-in" id="education">
+        <h3>education</h3>
+        <ul>
+          <li><strong style="color:var(--black)">uc berkeley</strong><br>cognitive science (business conc.) + data science minor | jan 2026 - dec 2028</li>
+          <li><strong style="color:var(--black)">el camino college</strong><br>business administration | aug 2023 - dec 2025</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2 class="section-title fade-in">locked in list:</h2>
+    <div class="exp-list">
+
+      <div class="exp-item" id="admissions">
+        <div class="exp-left">
+          <p class="exp-org">uc berkeley undergraduate admissions</p>
+          <p class="exp-role">student admissions advisor | aug 2026 - present</p>
+        </div>
+        <div class="exp-right">
+          <p>i act as a trusted advisor to 20+ prospective and admitted students per week, translating uc application, financial aid, and campus-resource requirements into clear guidance. i consult applicants on shaping their personal statements and supplemental materials into well-structured narratives, and i represent the office of undergraduate admissions in live presentations at recruitment events, college fairs, and yield programs, adapting my messaging for varied audiences. this work contributed to a 4% increase in yield among first-gen apps.</p>
+        </div>
+      </div>
+
+      <div class="exp-item" id="gwc">
+        <div class="exp-left">
+          <p class="exp-org">uc berkeley girls who code</p>
+          <p class="exp-role">vice president | feb 2026 - present</p>
+        </div>
+        <div class="exp-right">
+          <p>i built partnerships with uber, amazon, pinterest, and uc berkeley cdss, creating recruiting &amp; networking pipelines for members and conducting business analytics research to maximize our partnerships with numerous companies. i designed and led 4 technical workshops per semester (python, web development, and ai), translating technical concepts into accessible, hands-on content for 25+ underrepresented and beginner coders, and organized an ai research panel with faculty and industry practitioners on research-to-industry ai applications that drew 40+ students for discussion and networking. i also oversee and delegate 5 internal teams, launching 3 new member-focused initiatives and driving operational efficiency and goal alignment.</p>
+        </div>
+      </div>
+
+      <div class="exp-item" id="anova">
+        <div class="exp-left">
+          <p class="exp-org">anova</p>
+          <p class="exp-role">cs mentor &amp; curriculum developer | feb 2026 - present</p>
+        </div>
+        <div class="exp-right">
+          <p>first club i joined at uc berkeley. i became super invested into data science and coding (html, python) before going to berkeley so i thought i'd join a cs club for the fun of it. it ended up being one of the most memorable things i've invested in here. not only do i get to teach myself coding by teaching kids around the bay area, i got to meet a bunch of extremely smart and talented individuals who are well versed in the data field! i led technical project coordination for a 50+ participant hackathon for bay area high school students, using project tracking systems that hit 93%+ completion rates, and built and delivered individualized cs curriculum to 100+ students across 8 school sites.</p>
+        </div>
+      </div>
+
+      <div class="exp-item" id="transferrep">
+        <div class="exp-left">
+          <p class="exp-org">asuc office of the transfer student representative</p>
+          <p class="exp-role">community outreach associate | aug 2026 - present</p>
+        </div>
+        <div class="exp-right">
+          <p>i organize community town halls to connect non-traditional and incoming transfer students with campus life, and partner directly with campus registered student organizations (rsos) and transfer identity affinity groups to co-host collaborative resource-sharing events. i also advocate for and distribute critical guidance on transfer support initiatives, including transfer-specific academic programs, basic needs resources, and campus housing (such as anchor house and the transfer living learning community).</p>
+        </div>
+      </div>
+
+      <div class="exp-item" id="corps">
+        <div class="exp-left">
+          <p class="exp-org">california college corps (dorothy day house)</p>
+          <p class="exp-role">community fellow &amp; operations volunteer | aug 2026 - present</p>
+        </div>
+        <div class="exp-right">
+          <p>i support daily kitchen and food recovery operations, preparing and distributing 500+ nutritious hot meals per day to unhoused community members in downtown berkeley. i also assist with retail operations, inventory sorting, merchandising, and customer support at dorothy’s closet, which directly generates proceeds that fund emergency shelter programs, clean clothing distributions, and social services. i guide and welcome new community volunteers through kitchen safety workflows, donation sorting procedures, and trauma-informed, dignity-first service standards, and help coordinate seasonal clothing drives and process direct material donations.</p>
+        </div>
+      </div>
+
+      <div class="exp-item" id="fellow">
+        <div class="exp-left">
+          <p class="exp-org">united nations academic impact</p>
+          <p class="exp-role">product &amp; business development intern | aug 2025 - dec 2025</p>
+        </div>
+        <div class="exp-right">
+          <p>one of my first "coding" experiences. i served on the founding team for a student-opportunity platform, defining scope and prioritizing features across 5 core pages. i ran 30+ user tests and turned the qualitative research into concrete design and prioritization decisions, and i was the voice of the product, presenting design rationale and tradeoffs to nontechnical reviewers. i was also selected as one of a global cohort (top 8%) of student leaders advancing the un sustainable development goals, and led a campus social impact initiative from concept to execution.</p>
+        </div>
+      </div>
+
+      <div class="exp-item" id="aso">
+        <div class="exp-left">
+          <p class="exp-org">el camino college</p>
+          <p class="exp-role">ambassador | outreach &amp; school relations</p>
+        </div>
+        <div class="exp-right">
+          <p>my first on-campus job at my cc! worked with a group of 30 other ambassadors to go around the los angeles area to encourage students — specifically those from low-income and first-generation backgrounds — to pursue education. i got to work with many diverse groups of people and help them find their way back to college. overall a very rewarding experience. i won the annual outreach competition for most prospective students registered (650+), surpassing the prior year's record, and traveled across la county to recruit students to attend el camino college, promoting the college's programs and resources. i also led 700+ visitors on tours, presenting resources and fostering an inclusive and welcoming community culture. on the data side, i collected and analyzed prospective student data to identify outreach opportunities across los angeles communities, then used those insights to refine our outreach approaches, maximize resource impact, and improve prospective student engagement.</p>
+        </div>
+      </div>
+
+      <div class="exp-item" id="asodir">
+        <div class="exp-left">
+          <p class="exp-org">associated students organization &amp; inter club council</p>
+          <p class="exp-role">director of academic affairs &amp; director of administrative services | jun 2023 - jun 2025</p>
+        </div>
+        <div class="exp-right">
+          <p>i was elected director of academic affairs during my second year of cc — my first official elected role — and also served as director of administrative services for the inter club council. i managed a $200,000 budget across 75 clubs and 10 campus programs, designing a new allocation system that increased funded events by 14% year-over-year without cutting costs. i led 36 senators across 9 academic divisions to advance academic policies and student initiatives, and built an ai-driven system analyzing enrollment and survey data to identify high-demand courses, resulting in 2 new chemistry and data science courses added for fall 2024. i also partnered with the vp of the college and college deans to redesign academic divisions to address a $20 million campus deficit using past business performance trends and data. one of my favorite things about icc was discovering new clubs — a standout was the outdoor recreation club, where we hiked around southern california and even camped before the semester ended.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="funfacts">
+    <h2 class="section-title fade-in">life outside tech</h2>
+    <ul class="funfacts-list fade-in">
+      <li>degrees: as business, aa economics, as-t biology, as general science, as physical science, aa psychology, aa sociology, aa anthropology &amp; aa social justice (awarded, june 2025)</li>
+      <li>in my spare time i love hiking, camping, ice skating, designing, photography and staring at spreadsheets for hours</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>feel free to contact me here!</p>
+    <div style="display:flex; gap:2rem; flex-wrap:wrap;">
+      <a href="mailto:kellykimnguyen@berkeley.edu">kellykimnguyen@berkeley.edu</a>
+      <a href="https://www.linkedin.com/in/guavas" target="_blank">linkedin.com/in/guavas</a>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-in, .exp-item').forEach(el => observer.observe(el));
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileClose = document.getElementById('mobileClose');
+
+    hamburger.addEventListener('click', () => mobileMenu.classList.add('open'));
+    mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+  </script>
+</body>
+</html>
