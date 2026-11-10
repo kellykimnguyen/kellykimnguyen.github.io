@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>kelly's site!! | products</title>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html"><span class="sticker st-star"></span>kelly's site!!</a>
+    <ul class="nav-links">
+      <li class="dropdown">
+        <a href="index.html#about">about me</a>
+        <ul class="dropdown-menu">
+          <li><a href="index.html#education">education</a></li>
+          <li><a href="index.html#funfacts">life outside tech</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="products.html" aria-current="page">products</a>
+        <ul class="dropdown-menu">
+          <li><a href="products.html#aso-project">aso data project</a></li>
+          <li><a href="products.html#product-analysis">product analysis + prd</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="experience.html">experience</a>
+        <ul class="dropdown-menu">
+          <li><a href="experience.html#admissions">uc berkeley admissions</a></li>
+          <li><a href="experience.html#gwc">girls who code</a></li>
+          <li><a href="experience.html#anova">anova</a></li>
+          <li><a href="experience.html#transferrep">asuc transfer student rep</a></li>
+          <li><a href="experience.html#corps">california college corps</a></li>
+          <li><a href="experience.html#fellow">united nations</a></li>
+          <li><a href="experience.html#aso">outreach &amp; school relations</a></li>
+          <li><a href="experience.html#asodir">aso &amp; inter club council</a></li>
+        </ul>
+      </li>
+      <li><a href="Nguyen_Kelly.pdf" target="_blank">resume</a></li>
+      <li><a href="Nguyen_Kelly_Transcripts.pdf" target="_blank">transcripts</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" id="mobileClose">x</button>
+    <a href="index.html">about me</a>
+    <a href="products.html" aria-current="page">products</a>
+    <a href="experience.html">experience</a>
+    <a href="Nguyen_Kelly.pdf" target="_blank">resume</a>
+    <a href="Nguyen_Kelly_Transcripts.pdf" target="_blank">transcripts</a>
+  </div>
+
+  <section id="products" class="first">
+    <h2 class="section-title fade-in">products<span class="sticker st-star" style="width:1.2em;height:1.2em;margin-left:0.35em;vertical-align:-0.2em" aria-hidden="true"></span></h2>
+    <p class="proj-sub fade-in">two projects: one about data, one about product thinking.</p>
+    <div class="exp-list">
+
+      <div class="exp-item" id="aso-project">
+        <div class="exp-left">
+          <p class="exp-org">course demand dashboard</p>
+          <p class="exp-role">replica of my aso data work | built with sample data</p>
+          <div class="tags"><span>sql</span><span>power bi</span><span>tableau</span></div>
+        </div>
+        <div class="exp-right">
+          <p class="lbl">problem</p>
+          <p>course demand lived in three messy places: enrollment exports, waitlists, and student surveys. deans couldn't see which classes students actually needed. i consolidated everything into clean datasets and dashboards that stakeholders could read in a minute. this is a rebuilt version with made-up numbers.</p>
+
+          <p class="lbl">pipeline</p>
+          <div class="flow"><span>enrollment export</span><span>waitlist log</span><span>student survey</span><i>→</i><span class="hl">sql: clean + join</span><i>→</i><span class="hl">power bi / tableau</span><i>→</i><span>1-page brief for deans</span></div>
+
+          <p class="lbl">what stakeholders see</p>
+          <div class="kpis">
+            <div class="kpi"><b>6</b><span>courses ranked</span></div>
+            <div class="kpi"><b>3</b><span>data sources joined</span></div>
+            <div class="kpi"><b>2</b><span>courses to expand</span></div>
+          </div>
+          <div class="chart">
+            <svg viewBox="0 0 560 190" role="img" aria-label="bar chart of unmet demand index by course, sample data">
+              <text x="0" y="12">unmet demand index by course</text>
+              <g>
+                <text x="0" y="40">intro chemistry</text><rect x="130" y="28" width="360" height="16" fill="#5b86c5"/><text class="v" x="498" y="40">92</text>
+                <text x="0" y="68">intro data science</text><rect x="130" y="56" width="344" height="16" fill="#5b86c5"/><text class="v" x="482" y="68">88</text>
+                <text x="0" y="96">statistics</text><rect x="130" y="84" width="278" height="16" fill="#0e0e0e"/><text class="v" x="416" y="96">71</text>
+                <text x="0" y="124">intro python</text><rect x="130" y="112" width="250" height="16" fill="#0e0e0e"/><text class="v" x="388" y="124">64</text>
+                <text x="0" y="152">microeconomics</text><rect x="130" y="140" width="203" height="16" fill="#0e0e0e"/><text class="v" x="341" y="152">52</text>
+                <text x="0" y="180">calculus</text><rect x="130" y="168" width="160" height="16" fill="#0e0e0e"/><text class="v" x="298" y="180">41</text>
+              </g>
+            </svg>
+          </div>
+          <p class="note">sample data. blue = recommended to add sections. in the real project, this kind of analysis led to 2 new chemistry and data science courses for fall 2024.</p>
+
+          <p class="lbl">the sql behind it</p>
+<pre class="code"><code>WITH enroll AS (
+  SELECT course_id, COUNT(*) AS enrolled, MAX(seats) AS seats
+  FROM enrollments WHERE term = '2024FA' GROUP BY course_id),
+wait AS (
+  SELECT course_id, COUNT(DISTINCT student_id) AS waitlisted
+  FROM waitlists GROUP BY course_id),
+survey AS (
+  SELECT course_id, AVG(interest_score) AS interest
+  FROM survey_clean GROUP BY course_id)
+SELECT e.course_id,
+  ROUND(100 * (0.6 * LEAST(w.waitlisted / e.seats, 1)
+             + 0.4 * (s.interest / 5)), 1) AS demand_index
+FROM enroll e
+LEFT JOIN wait w   USING (course_id)
+LEFT JOIN survey s USING (course_id)
+ORDER BY demand_index DESC;</code></pre>
+          <p class="note">weights are illustrative. the index blends waitlist pressure and survey interest into one number that's easy to rank.</p>
+        </div>
+      </div>
+
+      <div class="exp-item" id="product-analysis">
+        <div class="exp-left">
+          <p class="exp-org">product analysis + prd</p>
+          <p class="exp-role">pm case study | course planning for transfer students</p>
+          <div class="tags"><span>prd</span><span>prioritization</span><span>wireframe</span></div>
+        </div>
+        <div class="exp-right">
+          <p class="lbl">audience</p>
+          <p>transfer students at a large public university. they have about two years to finish a major, so every term has to count, and they're new to the campus tools.</p>
+
+          <p class="lbl">pain points (hypotheses to validate in interviews)</p>
+          <ul class="plain">
+            <li><b>1. requirements are hard to map.</b> it's unclear which course counts toward which requirement.</li>
+            <li><b>2. waitlists are a gamble.</b> students rarely know their odds or have a backup plan.</li>
+            <li><b>3. planning is scattered.</b> requirements, schedules, and seat info live in different tabs and spreadsheets.</li>
+          </ul>
+
+          <p class="lbl">solution</p>
+          <p>a term planner that puts the requirement checklist, a conflict-free schedule, and waitlist backups on one screen.</p>
+
+          <p class="lbl">mvp scope</p>
+          <div class="split">
+            <div class="grow scroll-x">
+              <table class="pm">
+                <tr><th>feature</th><th>impact</th><th>effort</th><th>priority</th></tr>
+                <tr><td>requirement tracker</td><td>high</td><td>med</td><td>p0</td></tr>
+                <tr><td>conflict-free schedule builder</td><td>high</td><td>high</td><td>p0</td></tr>
+                <tr><td>waitlist backup picks</td><td>med</td><td>low</td><td>p1</td></tr>
+                <tr><td>share plan with advisor</td><td>low</td><td>low</td><td>p2</td></tr>
+              </table>
+            </div>
+            <div class="wire" role="img" aria-label="lo-fi wireframe of a term planner screen">
+              <div class="w-h">fall plan</div>
+              <div>major reqs 9/14</div>
+              <div class="w-bar"><i style="width:64%"></i></div>
+              <div class="w-row"><b>stats 20</b><span>fits 2 reqs</span></div>
+              <div class="w-row"><b>chem 1a</b><span class="warn">waitlist</span></div>
+              <div class="w-row"><b>backup: bio 1a</b><span>open</span></div>
+              <div class="w-btn">share with advisor</div>
+            </div>
+          </div>
+          <p class="note">lo-fi wireframe. placeholders, not real course data.</p>
+
+          <p class="lbl">how i'd measure success</p>
+          <ul class="plain">
+            <li><b>north star:</b> % of transfer students with a full term plan before enrollment opens.</li>
+            <li><b>supporting:</b> time to build a schedule, and how often students land a backup when waitlisted.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <footer>
+    <p>feel free to contact me here!<span class="sticker st-star" aria-hidden="true"></span></p>
+    <div style="display:flex; gap:2rem; flex-wrap:wrap;">
+      <a href="mailto:kellykimnguyen@berkeley.edu">kellykimnguyen@berkeley.edu</a>
+      <a href="https://www.linkedin.com/in/guavas" target="_blank">linkedin.com/in/guavas</a>
+    </div>
+  </footer>
+
+  <script src="site.js"></script>
+</body>
+</html>
